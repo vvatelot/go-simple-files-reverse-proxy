@@ -1,0 +1,9 @@
+{
+    "name": "simple-files-reverse-proxy-middleware",
+    "options": {
+        "allow-unauthenticated": true,
+        "memory": "128Mi",
+        "cpu": "1",
+        "port": "6060"
+    }
+}

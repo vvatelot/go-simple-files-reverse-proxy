@@ -1,0 +1,3 @@
+SET beautiful-lag-guitar.png http://caddy:2015/0987523723009832.png
+SET really-cute-kitten-800x600.jpg https://placekitten.com/800/600
+SET gopher.webp http://caddy:2015/0/1/sub/17/original-0c2e27a535ca15358be82cb68805de49.webp

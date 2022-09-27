@@ -1,0 +1,43 @@
+version: '3.7'
+
+services:
+  app:
+    build: .
+    ports:
+      - ${APP_PORT:-6060}:6060
+    volumes:
+      - ./pictures:/pictures
+    depends_on:
+      - redis
+    environment:
+      REDIS_DB: ${REDIS_DB:-0}
+      REDIS_HOST: ${REDIS_HOST:-redis}
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-}
+      REDIS_PORT: ${REDIS_PORT:-6379}
+
+  caddy:
+    image: caddy
+    restart: unless-stopped
+    ports:
+      - "2015:2015"
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./pictures:/srv/pictures
+      - caddy_data:/data
+      - caddy_config:/config
+
+  redis:
+    image: docker.io/bitnami/redis:7.0
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    ports:
+      - '6379:6379'
+    volumes:
+      - 'redis_data:/bitnami/redis/data'
+
+volumes:
+  redis_data:
+  caddy_data:
+  caddy_config:
